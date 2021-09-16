@@ -14,6 +14,8 @@ const EngineBut = (props)=>{
                 moveListForEngine.push("e8g8");
             }else if (moveList[i][1]==="BQ"){
                 moveListForEngine.push("e8c8");
+            }else if (moveList[i][1]==="WQ"){
+                moveListForEngine.push("e1c1");
             }else{
                 moveListForEngine.push(moveList[i][0] + moveList[i][1]);
             }

@@ -90,7 +90,7 @@ background-image: url("https://www.transparenttextures.com/patterns/brushed-alum
 .leftSide{
     width: 15%;
     height: 752px;
-    margin-left: 10%;
+    margin-left: 7%;
     display: grid;
     grid-template-rows: 150px 200px 200px;
 }
@@ -144,7 +144,8 @@ background-image: url("https://www.transparenttextures.com/patterns/brushed-alum
 
 @media (max-width:1650px){
     .leftSide{
-        margin-right: 10%;
+        margin-right: 7%;
+        margin-left: 2%;
     }
     .middleBoard{
         width: 700px;
@@ -160,6 +161,10 @@ background-image: url("https://www.transparenttextures.com/patterns/brushed-alum
 }
 @media (max-width:1320px){
     .leftSide{
-        visibility: hidden;
+        display: none;
     }
+    .boardDiv{
+        margin-left: 120px;
+    }
+    
 }
