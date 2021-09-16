@@ -47,7 +47,7 @@ const EngineBut = (props)=>{
     const getBest=(movesListicle: string)=>{
         if(movesListicle){
             var bestMove ="" 
-            fetch("http://localhost:3001/", {
+            fetch("https://calo-chess-backend.herokuapp.com/", {
                     method: "POST",
                     headers: {'Content-Type': 'application/json',
                                 'Accept': 'application/json'},
