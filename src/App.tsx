@@ -88,8 +88,8 @@ function App() {
         <Route exact path="/nakamura_bareev">
           <Game 
             title="Evgeny Bareev vs Hikaru Nakamura"
-            whiteName="Hikaru Nakamura"
-            blackName="Evgenny Bareev"
+            whiteName="Evgenny Bareev"
+            blackName="Hikaru Nakamura"
             blackImg="/playerImgs/hikaru.jpg"
             whiteImg="/playerImgs/bareev.jpg"
             description="Hikaru Nakamura defeats grandmaster  Evgeny Bareev in 11 moves! Can you find Bareevs Blunder?"
