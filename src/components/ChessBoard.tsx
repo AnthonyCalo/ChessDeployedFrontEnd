@@ -444,11 +444,6 @@ function ChessBoardMovesAlready(props: any){
                 }  
             }      
     }
-
-
-        
-        
-
         }
     
     let board: any=[];
