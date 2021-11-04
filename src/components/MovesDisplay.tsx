@@ -17,7 +17,16 @@ const MovesDisplay = (props: any)=>{
         //returns a white move and black move
         //if index =0 or index is even then that move is white and the next is blacks
         const moves= props.movesList.map((move: any, index: number)=>{
-            if((index===0 || index%2===0) &&  move[0]!=="gameOver"){  
+            if((index===0 || index%2===0) &&  move[0]!=="gameOver"){
+                //show a hastag next to move if it is checkmate
+                if(props.movesList[index+1][2]==="mate"){
+                    return( 
+                        <>
+                            <div className={`white_move ${index===props.move-1 ? "current_move": ""}`}>{move[1]}</div>
+                            <div className= {`black_move ${index+1===props.move-1 ? "current_move": ""}`}>{props.movesList[index+1][1]}#</div>  
+                        </>
+                    )
+                }
                 return(
                 <>
                     <div className={`white_move ${index===props.move-1 ? "current_move": ""}`}>{move[1]}</div>

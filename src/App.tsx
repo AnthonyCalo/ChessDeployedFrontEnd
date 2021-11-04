@@ -1,6 +1,6 @@
 import Header from "./components/Header";
 import Sidebar from "./components/SideBar";
-import {movesList, carlsen_duda ,dubov_simon,theApplause, kasparovDB, carlsen_giri, carlsen_ivanchuk, nakamura_bareev, morphy_anderson, kasparov_kramnik} from "./game/moves";
+import {movesList, spassky_larsen, carlsen_duda ,dubov_simon,theApplause, kasparovDB, carlsen_giri, carlsen_ivanchuk, nakamura_bareev, morphy_anderson, kasparov_kramnik} from "./game/moves";
 import HomePage from './components/HomePage';
 import Game from "./components/GamePage";
 import {
@@ -148,6 +148,18 @@ function App() {
           It is a fascinating game. Duda took a 'poison' c3 pawn on move 10 which lead to his defeat."
           movesList={carlsen_duda}
           gameOver="Duda resigned in this position"
+            /> 
+        </Route>
+        <Route exact path="/spassky_larsen">
+        <Game 
+          title="Bent Larsen vs. Borris Spassky"
+          whiteName="Bent Larsen"
+          whiteImg="/playerImgs/larsen.png"
+          blackName="Boris Spassky"
+          blackImg="/playerImgs/spassky2.jpg"
+          description="Powerful attac by Boris Spassky. Marching his pawns up the board relentlessly. This game was played on April 3rd, 1970."
+          movesList={spassky_larsen}
+          gameOver="CheckMate for Spassky"
             /> 
         </Route>
       </Switch>
