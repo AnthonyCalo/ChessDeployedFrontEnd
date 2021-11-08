@@ -1,6 +1,6 @@
 import Header from "./components/Header";
 import Sidebar from "./components/SideBar";
-import {movesList, spassky_larsen, carlsen_duda ,dubov_simon,theApplause, kasparovDB, carlsen_giri, carlsen_ivanchuk, nakamura_bareev, morphy_anderson, kasparov_kramnik} from "./game/moves";
+import {movesList, caruana_ponomariov ,spassky_larsen, carlsen_duda ,dubov_simon,theApplause, kasparovDB, carlsen_giri, carlsen_ivanchuk, nakamura_bareev, morphy_anderson, kasparov_kramnik} from "./game/moves";
 import HomePage from './components/HomePage';
 import Game from "./components/GamePage";
 import {
@@ -157,9 +157,21 @@ function App() {
           whiteImg="/playerImgs/larsen.png"
           blackName="Boris Spassky"
           blackImg="/playerImgs/spassky2.jpg"
-          description="Powerful attac by Boris Spassky. Marching his pawns up the board relentlessly. This game was played on April 3rd, 1970."
+          description="Powerful attack by Boris Spassky. Marching his pawns up the board relentlessly. This game was played on April 3rd, 1970."
           movesList={spassky_larsen}
           gameOver="CheckMate for Spassky"
+            /> 
+        </Route>
+        <Route exact path="/caruana_ponomariov">
+        <Game 
+          title="Fabiano Caruana vs Ruslan Ponomariov"
+          whiteName="Fabiano Caruana"
+          whiteImg="/playerImgs/caruana.jpg"
+          blackName="Ruslan Ponomariov"
+          blackImg="/playerImgs/ruslan.jpg"
+          description="Incredible victory by Caruana. Ending the game in style. Try to find the best move for white at move #39. Played in Dormund Germany, 2014"
+          movesList={caruana_ponomariov}
+          gameOver="CheckMate for Caruana"
             /> 
         </Route>
       </Switch>
