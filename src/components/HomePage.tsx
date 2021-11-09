@@ -75,7 +75,11 @@ class HomePage extends React.Component {
                         <div className="LINKGAME">Fabiano Caruana vs Ruslan Ponomariov</div>
                         <BlackPlayerImg blackPlayer="/playerImgs/ruslan.jpg" blackClass="black-home"/>
                     </div></ a>
-                    
+                    <a href="ivanchuk_kasparov"><div className='gameListDiv'>
+                        <WhitePlayerImg whitePlayer="/playerImgs/kasparov3.jpg" whiteClass='white-home'/>
+                        <div className="LINKGAME">Vassily Ivanchuk vs Garry Kasparov</div>
+                        <BlackPlayerImg blackPlayer="/playerImgs/ivanchuk2.jpg" blackClass="black-home"/>
+                    </div></ a>
                     
             </div>
             <div className="gitLogoDiv">

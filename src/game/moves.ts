@@ -100,7 +100,15 @@ var caruana_ponomariov=[["e2","e4"],["e7","e5"],["g1","f3"],["g8","f6"],["f3","e
 ["b7","b6"],["h4","h6"],["g7","g8"],["h6","c6"],["c8","e6"],["g5","g6"],["g8","g7"],["g6","f7"],["e6","f7"],
 ["e5","e7"],["d8","e7"],["d3","a6"],["a7","a6"],["c6","a8", "mate"],["gameOver", "gameOver"]]
 
+var ivanchuk_kasparov=[["e2","e4"],["e7","e6"],["d2","d4"],["d7","d5"],["b1","c3"],["f8","b4"],["e4","e5"],
+["b7","b6"],["a2","a3"],["b4","f8"],["g1","f3"],["g8","e7"],["h2","h4"],["h7","h6"],["h4","h5"],["a7","a5"],
+["f1","b5"],["c7","c6"],["b5","a4"],["b8","d7"],["c3","e2"],["b6","b5"],["a4","b3"],["c6","c5"],["c2","c3"],["e7","c6"],["castle","WK"],
+["d8","c7"],["f1","e1"],["c5","c4"],["b3","c2"],["d7","b6"],["c1","f4"],["f8","e7"],["f4","g3"],["a8","b8"],
+["f3","h2"],["c7","d8"],["h2","g4"],["b5","b4"],["a3","b4"],["a5","b4"],["c3","b4"],["c6","b4"],["c2","b1"],
+["c8","d7"],["b2","b3"],["b8","a8"],["a1","a8"],["d8","a8"],["b3","c4"],["b6","c4"],["e2","c1"],["d7","a4"],
+["d1","e2"],["a8","a7"],["g4","e3"],["a7","d4"],["e3","c4"],["d5","c4"],["e2","f1"],["castle","BK"],["gameOver", "gameOver"]]
+
 export {movesList, theApplause, kasparovDB, carlsen_giri, carlsen_ivanchuk, nakamura_bareev, 
-        morphy_anderson, kasparov_kramnik, dubov_simon, carlsen_duda, spassky_larsen, caruana_ponomariov};
+        morphy_anderson, kasparov_kramnik, dubov_simon, carlsen_duda, spassky_larsen, caruana_ponomariov, ivanchuk_kasparov};
 
 //var kasparovDB: move[] = [[]]

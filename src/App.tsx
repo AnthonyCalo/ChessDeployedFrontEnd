@@ -1,6 +1,6 @@
 import Header from "./components/Header";
 import Sidebar from "./components/SideBar";
-import {movesList, caruana_ponomariov ,spassky_larsen, carlsen_duda ,dubov_simon,theApplause, kasparovDB, carlsen_giri, carlsen_ivanchuk, nakamura_bareev, morphy_anderson, kasparov_kramnik} from "./game/moves";
+import {movesList, caruana_ponomariov ,spassky_larsen, carlsen_duda ,dubov_simon,theApplause, kasparovDB, carlsen_giri, carlsen_ivanchuk, nakamura_bareev, morphy_anderson, kasparov_kramnik, ivanchuk_kasparov} from "./game/moves";
 import HomePage from './components/HomePage';
 import Game from "./components/GamePage";
 import {
@@ -172,6 +172,18 @@ function App() {
           description="Incredible victory by Caruana. Ending the game in style. Try to find the best move for white at move #39. Played in Dormund Germany, 2014"
           movesList={caruana_ponomariov}
           gameOver="CheckMate for Caruana"
+            /> 
+        </Route>
+        <Route exact path="/ivanchuk_kasparov">
+        <Game 
+          title="Garry Kasparov vs Vassily Ivanchuk"
+          whiteName="Garry Kasparov"
+          whiteImg="/playerImgs/kasparov3.jpg"
+          blackName="Vassily Ivanchuk"
+          blackImg="/playerImgs/ivanchuk2.jpg"
+          description="Vassily Ivanchuk took out the world champion while playing the French defense. Game was played in 1991."
+          movesList={ivanchuk_kasparov}
+          gameOver="Kasparov resigned in this position"
             /> 
         </Route>
       </Switch>
