@@ -1,4 +1,6 @@
 import React, {useState, useEffect, useRef} from "react";
+import { Modal} from 'react-bootstrap';
+import GameModal from "./Modal";
 import Square from "./square";
 import gameRef from "../game/legalmove";
 
@@ -70,7 +72,12 @@ function ChessBoardMovesAlready(props: any){
     const [userMovesEngine, setUME] = useState<String[]>([])
     const [moveCount, setMoveCount] = useState(0);
     const [takenPieces, setTaken]=useState<TakenPiece[]>([]);
-
+    //props for modal
+    const [modalOpen, setModalOpen] =useState(false);
+    const [before_end, setBeforeEnd]=useState(false);
+    function closeModal(){
+        setModalOpen(false)
+    }
     const movesList = props.movesList
     //says whether or not user moved a piece
     //important for setting board back to old position
@@ -170,14 +177,14 @@ function ChessBoardMovesAlready(props: any){
 
                 const parent=activePiece?.parentElement//needed to get original square. Need square to find the original piece on square
                 var currentPiece=pieces.find(p=> (p.file===parent?.id[0] && p.rank===parent.id[1]));
-                var rightTurn = currentPiece?.color===turn; //checks if players turn
+                //var rightTurn = currentPiece?.color===turn; //checks if players turn
 
                 
                 var attackedPiece = pieces.find(p => p.file===newFile && p.rank===newRank);
                 if(currentPiece){
                     validMove = referee.isValidMove(parent?.id, newSquare, currentPiece?.type, currentPiece?.color, pieces);
                 }
-                if(currentPiece?.type===5 && validMove && rightTurn){
+                if(currentPiece?.type===5 && validMove){
                     if(newSquare==="g1" && validMove ){
                         castle("WK");
                         setTurn(turn===0?1:0);
@@ -196,7 +203,7 @@ function ChessBoardMovesAlready(props: any){
 
                     }
                 }
-                if(attackedPiece && validMove && rightTurn){
+                if(attackedPiece && validMove){
                     //console.log("here attacking")
                     const attackSquare = attackedPiece?.file + attackedPiece.rank;
                     setPieces((value)=>{        
@@ -216,7 +223,7 @@ function ChessBoardMovesAlready(props: any){
                 setPieces((prev)=>{
                     const pieces=prev.map((selectPiece)=>{
                         const parent=activePiece?.parentElement
-                        if(validMove && rightTurn && parent&& selectPiece.file===parent.id[0] && selectPiece.rank===parent.id[1]){
+                        if(validMove && parent&& selectPiece.file===parent.id[0] && selectPiece.rank===parent.id[1]){
                             var moveEngine = parent.id + newSquare;
                             setUME([...userMovesEngine, moveEngine]);
                             //if the moves valid take the piece on current parent square
@@ -239,6 +246,8 @@ function ChessBoardMovesAlready(props: any){
             
         }
         }
+    //Castle function basically moves two pieces the rook and king
+    //has to be a seperate function than normal one piece move functin
     function castle(newSquare: string){
         let oldKingSquare ="";
         let newKingSquare="";
@@ -340,9 +349,12 @@ function ChessBoardMovesAlready(props: any){
             setUME([]);
         }
         moveSound.play()
+        //if(movesList[moveCount+1][0]==="gameOver"){
 
         if(move[0]==="gameOver"){
-            window.alert("Game Over, " + props.gameover);
+            //end of game. BeforeEnd shows this is the end game modal
+            setBeforeEnd(true);
+            setModalOpen(true);
 
         }else if(move[0]==="castle"){
             castle(move[1]);
@@ -380,6 +392,10 @@ function ChessBoardMovesAlready(props: any){
                 setPieces((prev)=>{
                     const pieces=prev.map((selectPiece)=>{
                         if(selectPiece.file===move[0][0] && selectPiece.rank===move[0][1]){
+                            if(selectPiece.type==0 && ((move[1][1]=='8' && selectPiece.color==0) || (move[1][1]==='1' && selectPiece.color==1))){
+                                selectPiece.type=4;
+                                selectPiece.image=("pieces/Bqueen.png")
+                            }
                             selectPiece.rank=move[1][1];
                             selectPiece.file=move[1][0];
                             setTurn(turn===0?1:0);
@@ -415,7 +431,8 @@ function ChessBoardMovesAlready(props: any){
         //set the move count back to do the opposite move
         //function is almost the same as forward function but new and old squares flipped
         if(moveCount===0 || moveCount < 0){
-            window.alert("Cant move back from move 0!");
+            setModalOpen(true);
+            setBeforeEnd(false);
             setMove(0);
         }else if(move[0]==="castle"){
             castleBack(move[1]);
@@ -483,6 +500,7 @@ function ChessBoardMovesAlready(props: any){
         <div className="boardDiv">
         {/* <MoveButton color={buttonClass()} turn={moveTurn}/> */}
 
+
         <div className="chessBoard"
             onMouseMove={event => movePiece(event)}
             onMouseDown={event => grabPiece(event)}
@@ -498,6 +516,15 @@ function ChessBoardMovesAlready(props: any){
         <button id="boardReset" className="moveBtn" onClick={()=>window.location.reload()}>Reset Board</button>
         <button id="nextBtn" className="nextBtn moveBtn" onClick={()=>{movePieceGame(movesList[moveCount])}}>Next Move</button>
         </div>
+        <Modal 
+            show={modalOpen}
+            size="lg"
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+        >
+            {before_end ? 
+            <GameModal closeModal={setModalOpen} text={props.gameover}/>: <GameModal closeModal={setModalOpen} text="Can't move back from move 0"/>}
+        </Modal>
         </>
         )
 
