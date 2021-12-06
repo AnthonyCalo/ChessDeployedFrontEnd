@@ -88,6 +88,9 @@ body{
 .gameHeader{
     text-align: center;
 }
+.hideBg{
+    display: none;
+}
 .leftSide{
     width: 15%;
     height: 752px;
@@ -219,6 +222,16 @@ body{
 .moveNumber{
     visibility: hidden;
     display: none;
+}
+
+.movingPiece{
+    --x: 50;
+    --y: 50;
+    position: absolute;
+    left: calc((var(--x) * 1px));
+    top: calc((var(--y) * 1px));
+    height: 94px;
+
 }
 .root{
     width: 100%;

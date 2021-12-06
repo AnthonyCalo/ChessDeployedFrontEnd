@@ -3,6 +3,7 @@ import { Modal} from 'react-bootstrap';
 import GameModal from "./Modal";
 import Square from "./square";
 import gameRef from "../game/legalmove";
+import MovingImage from "./MovingImage";
 
 enum pieceType {
     PAWN,
@@ -340,6 +341,58 @@ function ChessBoardMovesAlready(props: any){
     //     console.log(oldPiece[0].style.position);
     //     return true;
     // }
+    function createAnPiece(imgUrl, oldTop, oldLeft, newTop, newLeft){
+        const animatedPiece = new MovingImage(imgUrl, oldTop, oldLeft, newTop, newLeft)
+        let lastTime=0
+        let pieceExists=true
+        function update(time){
+            if(lastTime!=null && pieceExists===true){
+                const delta=time-lastTime
+                animatedPiece.update(delta)
+
+            }
+            lastTime=time
+            window.requestAnimationFrame(update)
+
+        }
+        if(pieceExists){
+            window.requestAnimationFrame(update)
+        }
+        setTimeout(()=>{
+            pieceExists=false;
+        }, 1500)
+    }
+    function moveWithAn(move: any){
+    //move with animation calls the animation of piece
+    //waits for animation time: then call move piece game function where react
+    //will update stae to re-render pieces on correct square
+        setMove(moveCount+1);            
+        
+        setTimeout(()=>{
+            movePieceGame(move)
+  
+        }, 500)
+        const id= move[0][0] + move[0][1]
+        const newid=move[1][0] + move[1][1]
+        let beforeSquare = document.getElementById(id)
+        let newSquare= document.getElementById(newid)
+        if(beforeSquare && newSquare){
+            //console.log(getComputedStyle(beforeSquare).getPropertyValue("position"));
+            //square location for animation function
+            var rect = beforeSquare.getBoundingClientRect();
+            var newRect= newSquare.getBoundingClientRect();
+
+            //gets image url from intial square. Need for createAnPiece function
+            let imgURL=getComputedStyle(beforeSquare.getElementsByClassName("chess-piece")[0])?.getPropertyValue("background-image")
+            //this basically hides the current square so that the piece isn't shown twice during movement
+            let befMove= beforeSquare.getElementsByClassName("chess-piece")[0]
+            befMove.classList.add("hideBg")
+            imgURL = imgURL.replace(/^url\(["']?/, '').replace(/["']?\)$/, '')
+            //console.log(imgURL)
+            createAnPiece(imgURL, rect.y, rect.x, newRect.y, newRect.x);
+        }
+    }
+
     function movePieceGame(move: any){
         //set pieces to old game position from saved oldGamePosition variable
         if(playerMoves){
@@ -358,7 +411,6 @@ function ChessBoardMovesAlready(props: any){
 
         }else if(move[0]==="castle"){
             castle(move[1]);
-            setMove(moveCount+1);
             setTurn(turn===0?1:0);
         }else{
             //regular move not castle or game over
@@ -396,6 +448,7 @@ function ChessBoardMovesAlready(props: any){
                                 selectPiece.type=4;
                                 selectPiece.image=("pieces/Bqueen.png")
                             }
+
                             selectPiece.rank=move[1][1];
                             selectPiece.file=move[1][0];
                             setTurn(turn===0?1:0);
@@ -405,7 +458,6 @@ function ChessBoardMovesAlready(props: any){
                     return pieces;
                 }
                 )
-                setMove(moveCount+1);            
             }
         }//else close. else meaning it isn't a castle move
     
@@ -514,7 +566,7 @@ function ChessBoardMovesAlready(props: any){
         <div className="belowButtons">
         <button id="backBtn" className="backBtn moveBtn" onClick={()=>{setbackMove(); movePieceBack()}}>Move back</button>
         <button id="boardReset" className="moveBtn" onClick={()=>window.location.reload()}>Reset Board</button>
-        <button id="nextBtn" className="nextBtn moveBtn" onClick={()=>{movePieceGame(movesList[moveCount])}}>Next Move</button>
+        <button id="nextBtn" className="nextBtn moveBtn" onClick={()=>{moveWithAn(movesList[moveCount])}}>Next Move</button>
         </div>
         <Modal 
             show={modalOpen}
