@@ -1,4 +1,4 @@
-const movingSpeed=500;
+const movingSpeed=300;
 export default class MovingImage{
     constructor(image, startTop=50, startLeft=50, newTop=50, newLeft=50){
         //URL of image for src img tag

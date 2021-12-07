@@ -76,6 +76,7 @@ function ChessBoardMovesAlready(props: any){
     //props for modal
     const [modalOpen, setModalOpen] =useState(false);
     const [before_end, setBeforeEnd]=useState(false);
+
     function closeModal(){
         setModalOpen(false)
     }
@@ -333,14 +334,8 @@ function ChessBoardMovesAlready(props: any){
         )
         
     } 
-    // function moveAnimation(oldSquare: string, newSquare: string){
-    //     let os = document.getElementById(oldSquare);
-    //     let ns = document.getElementById(newSquare);
-    //     var oldPiece = os?.getElementsByClassName("chess-piece") as HTMLCollectionOf<HTMLElement>;;
-    //      oldPiece[0].style.position="absolute";
-    //     console.log(oldPiece[0].style.position);
-    //     return true;
-    // }
+
+    //called with movewithAn(imation) function below
     function createAnPiece(imgUrl, oldTop, oldLeft, newTop, newLeft){
         const animatedPiece = new MovingImage(imgUrl, oldTop, oldLeft, newTop, newLeft)
         let lastTime=0
@@ -362,26 +357,41 @@ function ChessBoardMovesAlready(props: any){
             pieceExists=false;
         }, 1500)
     }
-    function moveWithAn(move: any){
-    //move with animation calls the animation of piece
-    //waits for animation time: then call move piece game function where react
-    //will update stae to re-render pieces on correct square
-        setMove(moveCount+1);            
-        
+    function moveBackWithAn(){
+        // if(!move){
+        //     return
+        // }
+        const move = movesList[moveCount-1]
+        getAnimationInfo(move, "backward")
         setTimeout(()=>{
-            movePieceGame(move)
-  
-        }, 500)
-        const id= move[0][0] + move[0][1]
-        const newid=move[1][0] + move[1][1]
-        let beforeSquare = document.getElementById(id)
-        let newSquare= document.getElementById(newid)
+            movePieceBack()
+            
+        }, 300)
+    }
+    function getAnimationInfo(move:any, direction:String="forward"){
+        let beforeSquare: any;
+        let newSquare: any;
+        if( direction==="backward"  && move){
+            const newid= move[0][0] + move[0][1]
+            const id=move[1][0] + move[1][1]
+            beforeSquare = document.getElementById(id)
+            newSquare= document.getElementById(newid)
+        }else if(direction=="forward" && move){
+            const id= move[0][0] + move[0][1]
+            const newid=move[1][0] + move[1][1]
+            beforeSquare = document.getElementById(id)
+            newSquare= document.getElementById(newid)
+        }
+
         if(beforeSquare && newSquare){
             //console.log(getComputedStyle(beforeSquare).getPropertyValue("position"));
             //square location for animation function
             var rect = beforeSquare.getBoundingClientRect();
             var newRect= newSquare.getBoundingClientRect();
-
+            console.log(beforeSquare)
+            if(!beforeSquare.getElementsByClassName("chess-piece")[0]){
+                return
+            }
             //gets image url from intial square. Need for createAnPiece function
             let imgURL=getComputedStyle(beforeSquare.getElementsByClassName("chess-piece")[0])?.getPropertyValue("background-image")
             //this basically hides the current square so that the piece isn't shown twice during movement
@@ -391,6 +401,21 @@ function ChessBoardMovesAlready(props: any){
             //console.log(imgURL)
             createAnPiece(imgURL, rect.y, rect.x, newRect.y, newRect.x);
         }
+    }
+    function moveWithAn(move: any){
+    //move with animation calls the animation of piece
+    //waits for animation time: then call move piece game function where react
+    //will update stae to re-render pieces on correct square
+        if(!move){
+            return
+        }
+        setMove(moveCount+1);            
+        
+        setTimeout(()=>{
+            movePieceGame(move)
+  
+        }, 300)
+        getAnimationInfo(move)
     }
 
     function movePieceGame(move: any){
@@ -564,7 +589,7 @@ function ChessBoardMovesAlready(props: any){
 
         {/* KChad to use arrow function because onclick won't work with type void */}
         <div className="belowButtons">
-        <button id="backBtn" className="backBtn moveBtn" onClick={()=>{setbackMove(); movePieceBack()}}>Move back</button>
+        <button id="backBtn" className="backBtn moveBtn" onClick={()=>{setbackMove(); moveBackWithAn()}}>Move back</button>
         <button id="boardReset" className="moveBtn" onClick={()=>window.location.reload()}>Reset Board</button>
         <button id="nextBtn" className="nextBtn moveBtn" onClick={()=>{moveWithAn(movesList[moveCount])}}>Next Move</button>
         </div>
