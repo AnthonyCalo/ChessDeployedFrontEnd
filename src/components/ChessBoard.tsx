@@ -38,31 +38,37 @@ let moveSound = new Audio('/sound/move_sound.mp3')
 const verticalAxis = ["8","7","6","5","4", "3","2","1"]
 const horizontalAxis = ["a","b","c","d","e","f","g","h"]
 
-const startingPieces: Piece[] = []
-for(var i=0; i<8; i++){
-    startingPieces.push({image: "pieces/Wpawn.png", rank: "2", file: horizontalAxis[i], type: pieceType.PAWN, color: Color.WHITE});
-}
-for(i=0; i<8; i++){
-    startingPieces.push({image: "pieces/Bpawn.png", rank: "7", file: horizontalAxis[i], type: pieceType.PAWN, color: Color.BLACK});
-}
+var startingPieces: Piece[] = []
 
-startingPieces.push({image: "pieces/Wrook.png", rank: "1", file: "a", type: pieceType.ROOK, color: Color.WHITE});
-startingPieces.push({image: "pieces/Wrook.png", rank: "1", file: "h", type: pieceType.ROOK, color: Color.WHITE});
-startingPieces.push({image: "pieces/Brook.png", rank: "8", file: "a", type: pieceType.ROOK, color: Color.BLACK});
-startingPieces.push({image: "pieces/Brook.png", rank: "8", file: "h", type: pieceType.ROOK, color: Color.BLACK});
-startingPieces.push({image: "pieces/Wknight.png", rank: "1", file: "b", type: pieceType.KNIGHT, color: Color.WHITE});
-startingPieces.push({image: "pieces/Wknight.png", rank: "1", file: "g", type: pieceType.KNIGHT, color: Color.WHITE});
-startingPieces.push({image: "pieces/Wbishop.png", rank: "1", file: "c", type: pieceType.BISHOP, color: Color.WHITE});
-startingPieces.push({image: "pieces/Wbishop.png", rank: "1", file: "f", type: pieceType.BISHOP, color: Color.WHITE});
-startingPieces.push({image: "pieces/Bknight.png", rank: "8", file: "b", type: pieceType.KNIGHT, color: Color.BLACK});
-startingPieces.push({image: "pieces/Bknight.png", rank: "8", file: "g", type: pieceType.KNIGHT, color: Color.BLACK});
-startingPieces.push({image: "pieces/Bbishop.png", rank: "8", file: "c", type: pieceType.BISHOP, color: Color.BLACK});
-startingPieces.push({image: "pieces/Bbishop.png", rank: "8", file: "f", type: pieceType.BISHOP, color: Color.BLACK});
-startingPieces.push({image: "pieces/Wqueen.png", rank: '1', file: "d", type: pieceType.QUEEN, color: Color.WHITE});
-startingPieces.push({image: "pieces/Wking.png", rank: '1', file: "e", type: pieceType.KING, color: Color.WHITE});
-startingPieces.push({image: "pieces/Bqueen.png", rank: '8', file: "d", type: pieceType.QUEEN, color: Color.BLACK});
-startingPieces.push({image: "pieces/Bking.png", rank: '8', file: "e", type: pieceType.KING, color: Color.BLACK});
-
+function create_start(){
+    const pieceArray: Piece[]=[]
+    for(var i=0; i<8; i++){
+        pieceArray.push({image: "pieces/Wpawn.png", rank: "2", file: horizontalAxis[i], type: pieceType.PAWN, color: Color.WHITE});
+    }
+    for(i=0; i<8; i++){
+        pieceArray.push({image: "pieces/Bpawn.png", rank: "7", file: horizontalAxis[i], type: pieceType.PAWN, color: Color.BLACK});
+    }
+    
+    pieceArray.push({image: "pieces/Wrook.png", rank: "1", file: "a", type: pieceType.ROOK, color: Color.WHITE});
+    pieceArray.push({image: "pieces/Wrook.png", rank: "1", file: "h", type: pieceType.ROOK, color: Color.WHITE});
+    pieceArray.push({image: "pieces/Brook.png", rank: "8", file: "a", type: pieceType.ROOK, color: Color.BLACK});
+    pieceArray.push({image: "pieces/Brook.png", rank: "8", file: "h", type: pieceType.ROOK, color: Color.BLACK});
+    pieceArray.push({image: "pieces/Wknight.png", rank: "1", file: "b", type: pieceType.KNIGHT, color: Color.WHITE});
+    pieceArray.push({image: "pieces/Wknight.png", rank: "1", file: "g", type: pieceType.KNIGHT, color: Color.WHITE});
+    pieceArray.push({image: "pieces/Wbishop.png", rank: "1", file: "c", type: pieceType.BISHOP, color: Color.WHITE});
+    pieceArray.push({image: "pieces/Wbishop.png", rank: "1", file: "f", type: pieceType.BISHOP, color: Color.WHITE});
+    pieceArray.push({image: "pieces/Bknight.png", rank: "8", file: "b", type: pieceType.KNIGHT, color: Color.BLACK});
+    pieceArray.push({image: "pieces/Bknight.png", rank: "8", file: "g", type: pieceType.KNIGHT, color: Color.BLACK});
+    pieceArray.push({image: "pieces/Bbishop.png", rank: "8", file: "c", type: pieceType.BISHOP, color: Color.BLACK});
+    pieceArray.push({image: "pieces/Bbishop.png", rank: "8", file: "f", type: pieceType.BISHOP, color: Color.BLACK});
+    pieceArray.push({image: "pieces/Wqueen.png", rank: '1', file: "d", type: pieceType.QUEEN, color: Color.WHITE});
+    pieceArray.push({image: "pieces/Wking.png", rank: '1', file: "e", type: pieceType.KING, color: Color.WHITE});
+    pieceArray.push({image: "pieces/Bqueen.png", rank: '8', file: "d", type: pieceType.QUEEN, color: Color.BLACK});
+    pieceArray.push({image: "pieces/Bking.png", rank: '8', file: "e", type: pieceType.KING, color: Color.BLACK});
+    
+    return pieceArray;
+}
+startingPieces= create_start();
 
 var oldGamePosition: Piece[] = [];
 function ChessBoardMovesAlready(props: any){
@@ -75,7 +81,6 @@ function ChessBoardMovesAlready(props: any){
     const [takenPieces, setTaken]=useState<TakenPiece[]>([]);
     //props for modal
     const [modalOpen, setModalOpen] =useState(false);
-    const [before_end, setBeforeEnd]=useState(false);
 
     function closeModal(){
         setModalOpen(false)
@@ -93,7 +98,6 @@ function ChessBoardMovesAlready(props: any){
     //passuser moves to the engine
     useEffect(()=>{
         props.passToEngine(userMovesEngine);
-        
     }, );
     useEffect(()=>{
         gameBeginAudio.play();
@@ -355,14 +359,36 @@ function ChessBoardMovesAlready(props: any){
         }
         setTimeout(()=>{
             pieceExists=false;
-        }, 1500)
+        }, 300)
     }
     function moveBackWithAn(){
-        // if(!move){
+        // if(moveCount<1){
         //     return
         // }
         const move = movesList[moveCount-1]
-        getAnimationInfo(move, "backward")
+        if(!move){
+            return
+        }
+        if(move[0]=="castle"){
+            let m1, m2;
+            if(move[1]==="WK"){
+                m1 = ["e1", "g1"]
+                m2 = ["h1", "f1"]
+            }else if(move[1]=="WQ"){
+                m1 = ["e1", "c1"]
+                m2 = ["a1", "d1"]
+            }else if(move[1]=="BK"){
+                m1 = ["e8", "g8"]
+                m2 = ["h8", "f8"]
+            }else{
+                m1 = ["e8", "c8"]
+                m2 = ["a8", "d8"]
+            }
+            getAnimationInfo(m1, "backward")
+            getAnimationInfo(m2, "backward")
+        }else{
+            getAnimationInfo(move, "backward")
+        }
         setTimeout(()=>{
             movePieceBack()
             
@@ -388,7 +414,6 @@ function ChessBoardMovesAlready(props: any){
             //square location for animation function
             var rect = beforeSquare.getBoundingClientRect();
             var newRect= newSquare.getBoundingClientRect();
-            console.log(beforeSquare)
             if(!beforeSquare.getElementsByClassName("chess-piece")[0]){
                 return
             }
@@ -400,6 +425,7 @@ function ChessBoardMovesAlready(props: any){
             imgURL = imgURL.replace(/^url\(["']?/, '').replace(/["']?\)$/, '')
             //console.log(imgURL)
             createAnPiece(imgURL, rect.y, rect.x, newRect.y, newRect.x);
+
         }
     }
     function moveWithAn(move: any){
@@ -415,7 +441,26 @@ function ChessBoardMovesAlready(props: any){
             movePieceGame(move)
   
         }, 300)
-        getAnimationInfo(move)
+        if(move[0]=="castle"){
+            let m1, m2;
+            if(move[1]==="WK"){
+                m1 = ["e1", "g1"]
+                m2 = ["h1", "f1"]
+            }else if(move[1]=="WQ"){
+                m1 = ["e1", "c1"]
+                m2 = ["a1", "d1"]
+            }else if(move[1]=="BK"){
+                m1 = ["e8", "g8"]
+                m2 = ["h8", "f8"]
+            }else{
+                m1 = ["e8", "c8"]
+                m2 = ["a8", "d8"]
+            }
+            getAnimationInfo(m1)
+            getAnimationInfo(m2)
+        }else{
+            getAnimationInfo(move)
+        }
     }
 
     function movePieceGame(move: any){
@@ -431,7 +476,6 @@ function ChessBoardMovesAlready(props: any){
 
         if(move[0]==="gameOver"){
             //end of game. BeforeEnd shows this is the end game modal
-            setBeforeEnd(true);
             setModalOpen(true);
 
         }else if(move[0]==="castle"){
@@ -489,9 +533,12 @@ function ChessBoardMovesAlready(props: any){
     }//movePieceGame close
     //called with backbutton moves back a game move
     function setbackMove(){
+        if(moveCount<1){
+            return
+        }
         setMove(moveCount-1);
-        setTimeout(function(){
-        },200);
+        // setTimeout(function(){
+        // },200);
     }
     function movePieceBack(){
         const move = movesList[moveCount-1];
@@ -507,11 +554,7 @@ function ChessBoardMovesAlready(props: any){
         } 
         //set the move count back to do the opposite move
         //function is almost the same as forward function but new and old squares flipped
-        if(moveCount===0 || moveCount < 0){
-            setModalOpen(true);
-            setBeforeEnd(false);
-            setMove(0);
-        }else if(move[0]==="castle"){
+        if(move[0]==="castle"){
             castleBack(move[1]);
             setTurn(turn===0?1:0);
 
@@ -566,6 +609,14 @@ function ChessBoardMovesAlready(props: any){
         }//ends second for loop
     }//ends first for loop
 
+    // this function resets the board to starting position and sets move to 0.
+    //it's called by the movedisplay component. It .clicks a hidden button 
+    const resetBoard=()=>{
+        const starting = create_start()
+        gameBeginAudio.play();
+        setPieces(starting)
+        setMove(0)
+    }
 
 
     //putting pieces in the squares
@@ -586,11 +637,10 @@ function ChessBoardMovesAlready(props: any){
             {board}
         </div>      
         </div>
-
         {/* KChad to use arrow function because onclick won't work with type void */}
         <div className="belowButtons">
         <button id="backBtn" className="backBtn moveBtn" onClick={()=>{setbackMove(); moveBackWithAn()}}>Move back</button>
-        <button id="boardReset" className="moveBtn" onClick={()=>window.location.reload()}>Reset Board</button>
+        <button id="boardReset" className="moveBtn" onClick={()=>resetBoard()}>Reset Board</button>
         <button id="nextBtn" className="nextBtn moveBtn" onClick={()=>{moveWithAn(movesList[moveCount])}}>Next Move</button>
         </div>
         <Modal 
@@ -599,8 +649,7 @@ function ChessBoardMovesAlready(props: any){
             aria-labelledby="contained-modal-title-vcenter"
             centered
         >
-            {before_end ? 
-            <GameModal closeModal={setModalOpen} text={props.gameover}/>: <GameModal closeModal={setModalOpen} text="Can't move back from move 0"/>}
+            <GameModal closeModal={setModalOpen} text={props.gameover}/>
         </Modal>
         </>
         )

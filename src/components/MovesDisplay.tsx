@@ -13,6 +13,10 @@ const MovesDisplay = (props: any)=>{
         var backMve = document.getElementById("backBtn");
         backMve?.click();
     }
+    const reset=()=>{
+        var rsBtn = document.getElementById("boardReset")
+        rsBtn?.click()
+    }
     const renderMoves=()=>{
         //returns a white move and black move
         //if index =0 or index is even then that move is white and the next is blacks
@@ -70,7 +74,7 @@ const MovesDisplay = (props: any)=>{
                 <EngineBut userMoveEngine={props.userMoveEngine} game={props.movesList} moveNum={props.move} />
                 <div className="btns">
                     <button className="back_btn MD_btn" onClick={()=>backMove()}>Move back <br/>&#40; &#8592; &#41;</button>
-                    <button className="reset__button MD_btn" onClick={()=>window.location.reload()}>ResetBoard</button>
+                    <button className="reset__button MD_btn" onClick={()=>reset()}>ResetBoard</button>
                     <button className="next_btn MD_btn" onClick={()=>nextMove()}>Next move<br/>&#40; &#8594; &#41;</button>
                 </div>
             </div>

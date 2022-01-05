@@ -1,6 +1,6 @@
 import Header from "./components/Header";
 import Sidebar from "./components/SideBar";
-import {movesList, caruana_ponomariov ,spassky_larsen, carlsen_duda ,dubov_simon,theApplause, kasparovDB, carlsen_giri, carlsen_ivanchuk, nakamura_bareev, morphy_anderson, kasparov_kramnik, ivanchuk_kasparov} from "./game/moves";
+import {movesList, caruana_ponomariov ,spassky_larsen, carlsen_duda ,dubov_simon,theApplause, kasparovDB, carlsen_giri, carlsen_ivanchuk, nakamura_bareev, morphy_anderson, kasparov_kramnik, ivanchuk_kasparov, aronian_dubov} from "./game/moves";
 import HomePage from './components/HomePage';
 import Game from "./components/GamePage";
 import {
@@ -184,6 +184,19 @@ function App() {
           description="Vassily Ivanchuk took out the world champion while playing the French defense. Game was played in 1991."
           movesList={ivanchuk_kasparov}
           gameOver="Kasparov resigned in this position"
+            /> 
+        </Route>
+        <Route exact path="/aronian_dubov">
+        <Game 
+          title="Levon Aronian vs Daniil Dubov"
+          whiteName="Levon Aronian"
+          whiteImg="/playerImgs/aronian.jpg"
+          blackName="Daniil Dubov"
+          blackImg="/playerImgs/dubov2.png"
+          description="This game was played at the 2021 World Blitz Championship. Awesome game. The beginning of the end for Dubov was when on move 24,
+          he played bishop to c6"
+          movesList={aronian_dubov}
+          gameOver="Dubov resigned in this position"
             /> 
         </Route>
       </Switch>
