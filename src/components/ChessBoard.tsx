@@ -616,6 +616,8 @@ function ChessBoardMovesAlready(props: any){
         gameBeginAudio.play();
         setPieces(starting)
         setMove(0)
+        setPM(false)
+        setUME([])
     }
 
 
