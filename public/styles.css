@@ -1,5 +1,10 @@
 html{
     font-family: 'IBM Plex Sans Arabic', sans-serif;
+
+}
+:root{
+    --board_height: 75vh;
+    --square_piece: calc(var(--board_height)/8)
 }
 a{
     text-decoration: none;
@@ -65,15 +70,15 @@ body{
     display: none
 }
 .chessBoard{
-    width: 752px;
-    height: 752px;
+    width: var(--board_height);
+    height: var(--board_height);
     border: 5px solid;
     border-style: outset;
     border-color: #553C2A;
     background: #553C2A;
     display: grid;
-    grid-template-columns: repeat(8, 94px);
-    grid-template-rows: repeat(8, 94px);
+    grid-template-columns: repeat(8, var(--square_piece));
+    grid-template-rows: repeat(8, var(--square_piece));
 }
 .container{
     width: 100%;
@@ -93,7 +98,7 @@ body{
 }
 .leftSide{
     width: 15%;
-    height: 752px;
+    height: var(--board_height);
     margin-left: 7%;
     display: grid;
     grid-template-rows: 150px 200px 200px;
@@ -230,15 +235,15 @@ body{
     position: absolute;
     left: calc((var(--x) * 1px));
     top: calc((var(--y) * 1px));
-    height: 94px;
+    height: var(--square_piece);
 
 }
 .root{
     width: 100%;
 }
 .square{
-    height: 94px;
-    width: 94px;
+    height: var(--square_piece);
+    width: var(--square_piece);
     border: 1px solid;
     display: flex;
     text-align: left;

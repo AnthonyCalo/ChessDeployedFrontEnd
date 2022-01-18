@@ -72,7 +72,12 @@ startingPieces= create_start();
 
 var oldGamePosition: Piece[] = [];
 function ChessBoardMovesAlready(props: any){
-    
+    var boardHeight = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--board_height"))
+    var body = document.body,
+    html = document.documentElement;
+    var height = Math.max( body.scrollHeight, body.offsetHeight, 
+                        html.clientHeight, html.scrollHeight, html.offsetHeight );
+    var height_of_board =Math.round(height / (boardHeight/100));
     const referee = new gameRef();
     const [pieces, setPieces] = useState<Piece[]>(startingPieces); 
     const [turn, setTurn] = useState(0);
@@ -112,10 +117,12 @@ function ChessBoardMovesAlready(props: any){
         const element = event.target;
         //const currSquare = element.parentNode.id;
         const chessboard = boardRef.current;
+        console.log(chessboard)
         if (chessboard){
-            let currentRank = verticalAxis[Math.floor((event.clientY- chessboard?.offsetTop) / 94)];
-            let currentFile = horizontalAxis[Math.floor((event.clientX - chessboard?.offsetLeft) / 94)];
+            let currentRank = verticalAxis[(Math.floor((event.clientY- chessboard?.offsetTop) / (height_of_board/8)))];
+            let currentFile = horizontalAxis[(Math.floor((event.clientX - chessboard?.offsetLeft) / (height_of_board/8)))];
             let currentPiece = pieces.find(p => p.file===currentFile && p.rank===currentRank);
+            console.log(currentRank, currentFile)
             if(element.classList.contains("chess-piece")){
                 element.style.position="absolute";
                 activePiece= element;
@@ -175,11 +182,11 @@ function ChessBoardMovesAlready(props: any){
 
             
             if(chessboard){
-                var newRank = verticalAxis[Math.floor((event.clientY- chessboard?.offsetTop) / 94)];  //this gets the new square based on where I release the mouse
-                var newFile = horizontalAxis[Math.floor((event.clientX - chessboard?.offsetLeft) / 94)];
+                var newRank = verticalAxis[(Math.floor((event.clientY- chessboard?.offsetTop) / (height_of_board/8)))];  //this gets the new square based on where I release the mouse
+                var newFile = horizontalAxis[(Math.floor((event.clientX - chessboard?.offsetLeft) / (height_of_board/8)))];
                 var newSquare = newFile + newRank;
 
-
+                console.log("NEW SQUARE", newSquare)
 
                 const parent=activePiece?.parentElement//needed to get original square. Need square to find the original piece on square
                 var currentPiece=pieces.find(p=> (p.file===parent?.id[0] && p.rank===parent.id[1]));

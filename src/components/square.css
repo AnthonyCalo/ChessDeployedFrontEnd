@@ -1,9 +1,14 @@
+:root{
+    --board_height: 65vh;
+    --square_piece: calc(var(--board_height)/8)
+}
+
 .chess-piece{
-    background-size: 94px;
+    background-size: calc(var(--board_height)/8);
     background-position: center;
     background-repeat: no-repeat;
-    height: 94px;
-    width: 94px;
+    height: var(--square_piece);
+    width: var(--square_piece);
 }
 
 .chess-piece:hover{
