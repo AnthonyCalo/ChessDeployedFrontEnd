@@ -1,7 +1,4 @@
-:root{
-    --board_height: 65vh;
-    --square_piece: calc(var(--board_height)/8)
-}
+
 
 .chess-piece{
     background-size: calc(var(--board_height)/8);
@@ -16,11 +13,11 @@
 }
 .bottomLabel{
     position:relative;
-    top:74.5px;
-    left:84px;
+    top: calc(var(--square_piece) * .75);
+    left: calc(var(--square_piece) * .89);
 }
 .bottomLabelTwo{
     position:relative;
-    top:76px;
-    left:72px;
+    top: calc(var(--square_piece) * .75);
+    left: calc(var(--square_piece) * .78);
 }
