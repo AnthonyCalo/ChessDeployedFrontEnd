@@ -37,11 +37,17 @@ const MovesDisplay = (props: any)=>{
                             <div className= {`black_move ${index+1===props.move-1 ? "current_move": ""}`}>{props.movesList[index+1][1]}</div>  
                         </>
                     )
+                }else if (props.movesList[index+1][0]==="gameOver"){
+                    return(
+                        <>
+                            <div className={`white_move ${index===props.move-1 ? "current_move": ""}`}>{move[0]}{move[1]}</div>
+                            <div className= {`black_move ${index+1===props.move-1 ? "current_move": ""}`}>{props.movesList[index+1][0]}</div>  
+                        </>)
                 }
                 return(
                 <>
-                    <div className={`white_move ${index===props.move-1 ? "current_move": ""}`}>{move[1]}</div>
-                    <div className= {`black_move ${index+1===props.move-1 ? "current_move": ""}`}>{props.movesList[index+1][1]}</div>  
+                    <div className={`white_move ${index===props.move-1 ? "current_move": ""}`}>{move[0]} {move[1]}</div>
+                    <div className= {`black_move ${index+1===props.move-1 ? "current_move": ""}`}>{props.movesList[index+1][0]} {props.movesList[index+1][1]}</div>  
                 </>)
             }            
             return null;
