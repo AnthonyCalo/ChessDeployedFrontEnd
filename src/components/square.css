@@ -13,11 +13,30 @@
 }
 .bottomLabel{
     position:relative;
-    top: calc(var(--square_piece) * .75);
-    left: calc(var(--square_piece) * .89);
+    left: 85%;
+    top: 80%;
+    width: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 15%;
+    font-size: 1rem;    
 }
 .bottomLabelTwo{
     position:relative;
-    top: calc(var(--square_piece) * .75);
-    left: calc(var(--square_piece) * .78);
+    left: 75%;
+    top: 80%;
+    width: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 15%;
+    font-size: 1rem;  
+
+}
+
+@media (max-width:1200px){
+    .bottomLabel, .bottomLabelTwo{
+        font-size: .75rem;
+    }
 }

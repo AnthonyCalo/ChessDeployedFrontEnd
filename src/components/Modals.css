@@ -1,0 +1,43 @@
+.modalDiv{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 50px;
+    z-index:999;
+    width: 35%;
+    display: grid;
+    margin-right: auto;
+    align-items: center;
+    justify-content: center;
+    background-color: antiquewhite;
+    background-image: url("https://www.transparenttextures.com/patterns/absurdity.png");
+    grid-template-rows: 25% 50% 25%;
+    border: 5px solid green;
+}
+.GOText{
+    font-family: 'Glory', sans-serif;
+    color: black;
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.GOModalBtn{
+    height: 40px;
+    padding: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    background-color: #509152;
+    color: white;
+}
+
+.overLay{
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    position: fixed;
+    background-color: rgba(0,0,0,.7);
+}

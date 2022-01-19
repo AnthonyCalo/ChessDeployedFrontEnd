@@ -15,18 +15,17 @@
   </head>
   <body>
     <div id="root"></div>
+    <div id="portal"></div>
   </body>
   <script>
     document.addEventListener('keydown', function(event) {
       event.preventDefault();
 
       if(event.code==="ArrowRight"){
-      event.preventDefault();
-
+        event.preventDefault();
         document.getElementById("nextBtn").click();
       }else if(event.code==="ArrowLeft"){
-      event.preventDefault();
-
+        event.preventDefault();
         document.getElementById("backBtn").click();
       }
     });

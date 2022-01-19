@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useRef} from "react";
 import { Modal} from 'react-bootstrap';
-import GameModal from "./Modal";
+import GameModal from "./Modal.jsx";
 import Square from "./square";
 import gameRef from "../game/legalmove";
 import MovingImage from "./MovingImage";
@@ -84,9 +84,6 @@ function ChessBoardMovesAlready(props: any){
     //props for modal
     const [modalOpen, setModalOpen] =useState(false);
 
-    function closeModal(){
-        setModalOpen(false)
-    }
     const movesList = props.movesList
     //says whether or not user moved a piece
     //important for setting board back to old position
@@ -667,14 +664,7 @@ function ChessBoardMovesAlready(props: any){
         <button id="boardReset" className="moveBtn" onClick={()=>resetBoard()}>Reset Board</button>
         <button id="nextBtn" className="nextBtn moveBtn" onClick={()=>{moveWithAn(movesList[moveCount])}}>Next Move</button>
         </div>
-        <Modal 
-            show={modalOpen}
-            size="lg"
-            aria-labelledby="contained-modal-title-vcenter"
-            centered
-        >
-            <GameModal closeModal={setModalOpen} text={props.gameover}/>
-        </Modal>
+        <GameModal isOpen={modalOpen} onClose={()=>{setModalOpen(false)}} text={props.gameover}/>
         </>
         )
 
